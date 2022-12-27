@@ -2,7 +2,7 @@
 {
   environment.systemPackages = with pkgs; [ vim git ];
   services.openssh.enable = true;
-  networking.hostName = "pi";
+  networking.hostName = "server";
   users = {
     users.myUsername = {
       password = "myPassword";

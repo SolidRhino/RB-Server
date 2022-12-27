@@ -5,12 +5,12 @@
   };
   outputs = { self, nixpkgs, nixos-hardware }: {
     images = {
-      pi = (self.nixosConfigurations.pi.extendModules {
+      server = (self.nixosConfigurations.server.extendModules {
         modules = [ "${nixpkgs}/nixos/modules/installer/sd-card/sd-image-aarch64.nix" ];
       }).config.system.build.sdImage;
     };
     nixosConfigurations = {
-      pi = nixpkgs.lib.nixosSystem {
+      server = nixpkgs.lib.nixosSystem {
         system = "aarch64-linux";
         modules = [
           nixos-hardware.nixosModules.raspberry-pi-4
