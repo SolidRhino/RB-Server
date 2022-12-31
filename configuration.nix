@@ -3,6 +3,14 @@
   environment.systemPackages = with pkgs; [ vim git tailscale];
   services = {
     openssh = {
+      allowSFTP = false;
+      enable = true;
+      openFirewall = false;
+      passwordAuthentication = false;
+      permitRootLogin = "no";
+      startWhenNeeded = true;
+    };
+
     tailscale = {
       enable = true;
     };
