@@ -15,6 +15,9 @@
       enable = true;
     };
   };
+
+  services.hardware.argonone.enable = true;
+
   users = {
     mutableUsers = false;
     users = {
