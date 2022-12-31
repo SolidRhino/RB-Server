@@ -1,6 +1,6 @@
 { pkgs, config, lib, inputs, ... }:
 {
-  environment.systemPackages = with pkgs; [ vim git tailscale];
+  environment.systemPackages = with pkgs; [ vim git tailscale ];
   services = {
     openssh = {
       allowSFTP = false;
@@ -19,7 +19,10 @@
   services.hardware.argonone.enable = true;
 
   nix = {
-    settings.auto-optimise-store = true;
+    settings = {
+      auto-optimise-store = true;
+      experimental-features = [ "nix-command" "flake" ];
+    };
     gc = {
       automatic = true;
       dates = "weekly";
