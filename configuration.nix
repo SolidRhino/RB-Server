@@ -1,4 +1,4 @@
-{ pkgs, config, lib, ... }:
+{ pkgs, config, lib, inputs, ... }:
 {
   environment.systemPackages = with pkgs; [ vim git ];
   services.openssh.enable = true;
