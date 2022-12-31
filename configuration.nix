@@ -16,12 +16,29 @@
     };
   };
   users = {
-    users.myUsername = {
-      password = "myPassword";
-      isNormalUser = true;
-      extraGroups = [ "wheel" ];
+    mutableUsers = false;
+    users = {
+      root = {
+        hashedPassword = "!";
+      };
+      server = {
+        extraGroups = [
+          "wheel"
+        ];
+        group = "server";
+        hashedPassword = "$y$j9T$6onXewS8c.KxiK609noHW.$wY4H93NlxCI5SBSiqsqctbZ7QNTt4XnuxEWCByRByN/";
+        isNormalUser = true;
+        openssh = {
+          authorizedKeys = {
+            keys = [
+              "ssh-ed25519 AAAAC3NzaC1lZDI1NTE5AAAAIJQ2OaPn0ChXY6bmYuIeoTd+X4hvockuD6buHCpIlNXn"
+            ];
+          };
+        };
+      };
     };
   };
+
   networking = {
     interfaces."eth0".useDHCP = true;
     firewall = {
