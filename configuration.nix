@@ -55,4 +55,6 @@
       ${tailscale}/bin/tailscale up -authkey tskey-auth-kGtZkF3CNTRL-MpPL5dqqLRPJ5w2TzFjbYP574iAe3hqF
     '';
   };
+
+  system.stateVersion = "23.05";
 }
