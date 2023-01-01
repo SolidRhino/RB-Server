@@ -40,6 +40,9 @@
   };
 
   users = {
+    groups = {
+      server = { };
+    };
     mutableUsers = false;
     users = {
       root = {
