@@ -70,6 +70,7 @@
 
   networking = {
     interfaces."eth0".useDHCP = true;
+    nftables.enable = true;
     firewall = {
       allowedUDPPorts = [
         41641
