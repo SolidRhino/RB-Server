@@ -11,6 +11,8 @@
       startWhenNeeded = true;
     };
 
+    mullvad-vpn.enable = true;
+
     tailscale = {
       enable = true;
     };
