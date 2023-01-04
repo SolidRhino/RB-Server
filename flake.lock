@@ -20,6 +20,22 @@
         "type": "github"
       }
     },
+    "argononed": {
+      "flake": false,
+      "locked": {
+        "lastModified": 1670634284,
+        "narHash": "sha256-I4YlGjb69ghrxRb2SDL4mje/bevdvFJZ/VArNFhK7yI=",
+        "owner": "DarkElvenAngel",
+        "repo": "argononed",
+        "rev": "7629b06b65797e9e35cf0379fe423b7cf12a375b",
+        "type": "gitlab"
+      },
+      "original": {
+        "owner": "DarkElvenAngel",
+        "repo": "argononed",
+        "type": "gitlab"
+      }
+    },
     "nixos-hardware": {
       "locked": {
         "lastModified": 1672644464,
@@ -54,6 +70,7 @@
     "root": {
       "inputs": {
         "agenix": "agenix",
+        "argononed": "argononed",
         "nixos-hardware": "nixos-hardware",
         "nixpkgs": "nixpkgs"
       }
