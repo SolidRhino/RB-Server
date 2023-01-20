@@ -11,8 +11,6 @@
       startWhenNeeded = true;
     };
 
-    mullvad-vpn.enable = true;
-
     tailscale = {
       enable = true;
     };
@@ -68,11 +66,10 @@
 
   networking = {
     interfaces."eth0".useDHCP = true;
-    nftables.enable = true;
     firewall = {
-      allowedUDPPorts = [
-        41641
-      ];
+      checkReversePath = "loose";
+      allowedUDPPorts = [];
+      allowedTCPPorts = [];
       enable = true;
       trustedInterfaces = [
         "tailscale0"
@@ -108,6 +105,4 @@
       ${tailscale}/bin/tailscale up -authkey tskey-auth-k8Xac44CNTRL-d8DHGkrrSc967B5KKAkre9372rXgEeTW7
     '';
   };
-
-  system.stateVersion = "23.05";
 }

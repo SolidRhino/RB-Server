@@ -1,9 +1,18 @@
 {
   inputs = {
-    nixpkgs.url = "github:nixos/nixpkgs/nixos-unstable";
+    stable.url = "github:nixos/nixpkgs/nixos-22.11";
+    nixpkgs.url = "github:NixOS/nixpkgs/nixos-22.11";
+    nixos-unstable.url = "github:nixos/nixpkgs/nixos-unstable";
+    small.url = "github:nixos/nixpkgs/nixos-unstable-small";
+    
     nixos-hardware.url = "github:nixos/nixos-hardware";
-    agenix.url = "github:ryantm/agenix";
-    agenix.inputs.nixpkgs.follows = "nixpkgs";
+    
+    agenix = {
+      url = "github:ryantm/agenix";
+      inputs.nixpkgs.follows = "nixpkgs";
+    };
+    
+    
     argononed = {
       url = "gitlab:DarkElvenAngel/argononed";
       flake = false;
