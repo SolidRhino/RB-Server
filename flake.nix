@@ -7,8 +7,8 @@
     
     nixos-hardware.url = "github:nixos/nixos-hardware";
     
-    agenix = {
-      url = "github:ryantm/agenix";
+    sops-nix = {
+      url = "github:Mic92/sops-nix";
       inputs.nixpkgs.follows = "nixpkgs";
     };
     
@@ -19,7 +19,7 @@
     };
   };
 
-  outputs = { self, nixpkgs, nixos-hardware, agenix, argononed, ... }: {
+  outputs = { self, nixpkgs, nixos-hardware, sops-nix, argononed, ... }: {
     images = {
       server = (self.nixosConfigurations.server.extendModules {
         modules = [ "${nixpkgs}/nixos/modules/installer/sd-card/sd-image-aarch64.nix" ];
@@ -35,7 +35,7 @@
           ./configuration.nix
           ./base.nix
           ./argononed.nix
-          agenix.nixosModule
+          sops-nix.nixosModules.sops
         ];
       };
     };
