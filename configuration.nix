@@ -1,6 +1,6 @@
 { pkgs, config, lib, inputs, ... }:
 {
-  environment.systemPackages = with pkgs; [ vim git tailscale ];
+  environment.systemPackages = with pkgs; [ nano vim git tailscale ];
   services = {
     openssh = {
       allowSFTP = false;
