@@ -78,6 +78,12 @@
     hostName = "server";
   };
 
+  #Setup sops
+  sops.age.sshKeyPaths = [ "/etc/ssh/ssh_host_ed25519_key" ];
+  sops.defaultSopsFile = ./secret.yaml;
+  sops.secrets."tailscaile_client_id" = { };
+  sops.secrets."tailscaile_client_secret" = { };
+  
   # create a oneshot job to authenticate to Tailscale
   systemd.services.tailscale-autoconnect = {
     description = "Automatic connection to Tailscale";
