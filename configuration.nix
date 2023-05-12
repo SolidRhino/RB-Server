@@ -86,6 +86,7 @@
   
   # create a oneshot job to authenticate to Tailscale
   systemd.services.tailscale-autoconnect = {
+    serviceConfig.SupplementaryGroups = [ config.users.groups.keys.name ];
     description = "Automatic connection to Tailscale";
 
     # make sure tailscale is running before trying to connect to tailscale
@@ -108,7 +109,31 @@
       fi
 
       # otherwise authenticate with tailscale
-      ${tailscale}/bin/tailscale up -authkey tskey-auth-k8Xac44CNTRL-d8DHGkrrSc967B5KKAkre9372rXgEeTW7
+
+      # generate new access token
+      access_token="$(${curl}/bin/curl -d "client_id=${config.sops.secrets.tailscaile_client_id.path}" -d "client_secret=${config.sops.secrets.tailscaile_client_secret.path}" "https://api.tailscale.com/api/v2/oauth/token" | ${jq}/bin/jq -r .access_token)"
+
+      # generate new authkey
+      authkey="$(${curl}/bin/curl "https://api.tailscale.com/api/v2/tailnet/-/keys" \
+          -u $ACCESS_TOKEN: \
+          --data-binary '
+        {
+          "capabilities": {
+            "devices": {
+              "create": {
+                "reusable": false,
+                "ephemeral": false,
+                "preauthorized": false,
+                "tags": [ "tag:headless" ]
+              }
+            }
+          },
+          "expirySeconds": 86400
+        }' | jq -r .key
+      )"
+
+      # authenticate with new authkey
+      ${tailscale}/bin/tailscale up -authkey $authkey
     '';
   };
 }
