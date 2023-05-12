@@ -8,14 +8,6 @@ jobs:
   lockfile:
     runs-on: ubuntu-latest
     steps:
-      - name: Install cross-compilation deps
-        run: |
-          sudo apt update
-          sudo apt install -q -y \
-            binfmt-support \
-            gcc-aarch64-linux-gnu \
-            qemu-system-aarch64 \
-            qemu-user-static
       - name: Checkout repository
         uses: actions/checkout@v3
       - name: Install nix
