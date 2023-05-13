@@ -111,11 +111,11 @@
       # otherwise authenticate with tailscale
 
       # generate new access token
-      access_token="$(${curl}/bin/curl -d "client_id=${config.sops.secrets.tailscaile_client_id.path}" -d "client_secret=${config.sops.secrets.tailscaile_client_secret.path}" "https://api.tailscale.com/api/v2/oauth/token" | ${jq}/bin/jq -r .access_token)"
+      access_token="$(${curl}/bin/curl -d "client_id=$(cat ${config.sops.secrets.tailscaile_client_id.path})" -d "client_secret=$(cat ${config.sops.secrets.tailscaile_client_secret.path})" "https://api.tailscale.com/api/v2/oauth/token" | ${jq}/bin/jq -r .access_token)"
 
       # generate new authkey
       authkey="$(${curl}/bin/curl "https://api.tailscale.com/api/v2/tailnet/-/keys" \
-          -u $ACCESS_TOKEN: \
+          -u $access_token: \
           --data-binary '
         {
           "capabilities": {
