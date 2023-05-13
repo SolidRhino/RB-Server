@@ -5,7 +5,7 @@
     openssh = {
       allowSFTP = false;
       enable = true;
-      openFirewall = false;
+      openFirewall = true;
       passwordAuthentication = false;
       permitRootLogin = "no";
       startWhenNeeded = true;
