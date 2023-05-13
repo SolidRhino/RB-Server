@@ -1,3 +1,4 @@
+[![build](https://github.com/SolidRhino/RB-Server/actions/workflows/build.yml/badge.svg)](https://github.com/SolidRhino/RB-Server/actions/workflows/build.yml)
 ### On NixOS
 
 If you're running NixOS and want to use this template to build the Raspberry Pi
@@ -10,7 +11,7 @@ NixOS configuration.
 }
 ```
 
-Then you will be able to run `nix build .#images.pi` and get a result you can
+Then you will be able to run `nix build .#images.server` and get a result you can
 flash to an SD Card and boot.
 
 After you've booted, you will be able to rebuild the nixosConfiguration on the
