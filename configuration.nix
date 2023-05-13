@@ -51,7 +51,7 @@
           "wheel"
         ];
         group = "server";
-        hashedPassword = "$y$j9T$6onXewS8c.KxiK609noHW.$wY4H93NlxCI5SBSiqsqctbZ7QNTt4XnuxEWCByRByN/";
+        hashedPassword = "$y$j9T$OmOVhczR/UZFeN5ISJ8xD0$OwAH3CGtPPuNJCG6tY1X3SGU9ttpEJ0F5kQrH2Bxqr3";
         isNormalUser = true;
         openssh = {
           authorizedKeys = {
