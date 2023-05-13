@@ -7,7 +7,8 @@
     kernelPackages = pkgs.linuxPackages_latest;
     # Disable ZFS by not including it in the list(s). Just adds a lot of
     # unnecessary compile time for this simple example project.
-    kernelModules = lib.mkForce [ "bridge" "macvlan" "tap" "tun" "loop" "atkbd" "ctr" ];
+    blacklistedKernelModules = lib.mkForce ["bluetooth" "btusb" "zfs"];
+    #kernelModules = lib.mkForce [ "bridge" "macvlan" "tap" "tun" "loop" "atkbd" "ctr" ];
     supportedFilesystems = lib.mkForce [ "btrfs" "reiserfs" "vfat" "f2fs" "xfs" "ntfs" "cifs" "ext4" "vfat" ];
     cleanTmpDir = true;
   };
