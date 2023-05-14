@@ -32,6 +32,9 @@ jobs:
         with:
           name: nixos-pi
           authToken: "${{ secrets.CACHIX_AUTH_TOKEN }}"
+
+          # Don't push source or .iso files as they are pointless to take up precious cache space.
+          pushFilter: '(-source$|nixpkgs\.tar\.gz$|\.iso$|linux\.img\.zst|-squashfs.img$|crate-$)'
       - name: Build image
         run: |
           nix show-config | grep -vi -e keys -e token
