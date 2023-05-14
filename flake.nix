@@ -4,15 +4,15 @@
     nixpkgs.url = "github:NixOS/nixpkgs/nixos-22.11";
     nixos-unstable.url = "github:nixos/nixpkgs/nixos-unstable";
     small.url = "github:nixos/nixpkgs/nixos-unstable-small";
-    
+
     nixos-hardware.url = "github:nixos/nixos-hardware";
-    
+
     sops-nix = {
       url = "github:Mic92/sops-nix";
       inputs.nixpkgs.follows = "nixpkgs";
     };
-    
-    
+
+
     argononed = {
       url = "gitlab:DarkElvenAngel/argononed";
       flake = false;
@@ -41,4 +41,3 @@
     };
   };
 }
-

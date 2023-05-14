@@ -68,8 +68,8 @@
     interfaces."eth0".useDHCP = true;
     firewall = {
       checkReversePath = "loose";
-      allowedUDPPorts = [];
-      allowedTCPPorts = [];
+      allowedUDPPorts = [ ];
+      allowedTCPPorts = [ ];
       enable = true;
       trustedInterfaces = [
         "tailscale0"
@@ -83,7 +83,7 @@
   sops.defaultSopsFile = ./secret.yaml;
   sops.secrets."tailscaile_client_id" = { };
   sops.secrets."tailscaile_client_secret" = { };
-  
+
   # create a oneshot job to authenticate to Tailscale
   systemd.services.tailscale-autoconnect = {
     serviceConfig.SupplementaryGroups = [ config.users.groups.keys.name ];
