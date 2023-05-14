@@ -139,7 +139,7 @@
             }
           },
           "expirySeconds": 86400
-        }' | jq -r .key
+        }' | ${jq}/bin/jq -r .key
       )"
 
       # authenticate with new authkey
