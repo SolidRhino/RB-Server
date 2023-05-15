@@ -1,9 +1,7 @@
 {
   inputs = {
-    stable.url = "github:nixos/nixpkgs/nixos-22.11";
     nixpkgs.url = "github:NixOS/nixpkgs/nixos-22.11";
     nixos-unstable.url = "github:nixos/nixpkgs/nixos-unstable";
-    small.url = "github:nixos/nixpkgs/nixos-unstable-small";
 
     nixos-hardware.url = "github:nixos/nixos-hardware";
 
@@ -11,15 +9,9 @@
       url = "github:Mic92/sops-nix";
       inputs.nixpkgs.follows = "nixpkgs";
     };
-
-
-    argononed = {
-      url = "gitlab:DarkElvenAngel/argononed";
-      flake = false;
-    };
   };
 
-  outputs = { self, nixpkgs, nixos-hardware, sops-nix, argononed, ... }: {
+  outputs = { self, nixpkgs, nixos-hardware, sops-nix, ... }: {
     images = {
       server = (self.nixosConfigurations.server.extendModules {
         modules = [ "${nixpkgs}/nixos/modules/installer/sd-card/sd-image-aarch64.nix" ];
@@ -34,7 +26,6 @@
           nixos-hardware.nixosModules.raspberry-pi-4
           ./configuration.nix
           ./base.nix
-          ./argononed.nix
           sops-nix.nixosModules.sops
         ];
       };

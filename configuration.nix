@@ -12,6 +12,8 @@
       startWhenNeeded = true;
     };
 
+    hardware.argonone.enable = true;
+
     tailscale = {
       enable = true;
     };
