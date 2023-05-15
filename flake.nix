@@ -20,7 +20,7 @@
 
     nixosConfigurations = {
       server = nixpkgs.lib.nixosSystem {
-        specialArgs = { inherit argononed; };
+        #specialArgs = { inherit argononed; };
         system = "aarch64-linux";
         modules = [
           nixos-hardware.nixosModules.raspberry-pi-4
