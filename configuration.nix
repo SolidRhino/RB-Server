@@ -1,6 +1,7 @@
 { pkgs, config, lib, inputs, ... }:
 {
   environment.systemPackages = with pkgs; [ nano vim git tailscale jq ];
+
   services = {
     openssh = {
       allowSFTP = false;
@@ -133,7 +134,7 @@
               "create": {
                 "reusable": false,
                 "ephemeral": false,
-                "preauthorized": false,
+                "preauthorized": true,
                 "tags": [ "tag:headless" ]
               }
             }
