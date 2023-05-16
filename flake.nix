@@ -12,9 +12,17 @@
   };
 
   outputs = { self, nixpkgs, nixos-hardware, sops-nix, ... }: {
+
+    nixosModules.openFirewall = { config, pkgs, lib, ... }: {
+      services.openssh.openFirewall = lib.mkForce true;
+    };
+
     images = {
       server = (self.nixosConfigurations.server.extendModules {
-        modules = [ "${nixpkgs}/nixos/modules/installer/sd-card/sd-image-aarch64.nix" ];
+        modules = [
+          self.nixosModules.openFirewall
+          "${nixpkgs}/nixos/modules/installer/sd-card/sd-image-aarch64.nix"
+        ];
       }).config.system.build.sdImage;
     };
 
