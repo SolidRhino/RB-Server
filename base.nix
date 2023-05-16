@@ -12,6 +12,11 @@
     supportedFilesystems = lib.mkForce [ "btrfs" "reiserfs" "vfat" "f2fs" "xfs" "ntfs" "cifs" "ext4" "vfat" ];
     cleanTmpDir = true;
   };
+
+  # Disable documentation
+  documentation.man.enable = false;
+  documentation.doc.enable = false;
+
   # "${nixpkgs}/nixos/modules/installer/sd-card/sd-image-aarch64.nix" usually
   # contains this, it's the one thing from the installer image that we
   # actually need.
