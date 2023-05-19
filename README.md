@@ -1,11 +1,12 @@
 [![build](https://github.com/SolidRhino/RB-Server/actions/workflows/build.yml/badge.svg)](https://github.com/SolidRhino/RB-Server/actions/workflows/build.yml)
+
 ### On NixOS
 
 If you're running NixOS and want to use this template to build the Raspberry Pi
 4 Image, you'll need to emulate an arm64 machine by adding the following to your
 NixOS configuration.
 
-```
+``` nix
 {
   boot.binfmt.emulatedSystems = [ "aarch64-linux" ];
 }
