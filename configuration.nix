@@ -1,4 +1,4 @@
-{ pkgs, config, lib, inputs, ... }:
+{ pkgs, config, ... }:
 {
   environment.systemPackages = with pkgs; [ nano vim git tailscale jq ];
 

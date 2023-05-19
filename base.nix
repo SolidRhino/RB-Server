@@ -1,4 +1,4 @@
-{ pkgs, config, lib, ... }:
+{ pkgs, lib, ... }:
 {
   boot = {
     # Use mainline kernel, vendor kernel has some issues compiling due to
