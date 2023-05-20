@@ -36,6 +36,7 @@ jobs:
           # Don't push source or .iso files as they are pointless to take up precious cache space.
           pushFilter: '(-source$|nixpkgs\.tar\.gz$|\.iso$|linux\.img\.zst|-squashfs.img$|crate-$)'
       - name: Build image
+        if: github.event_name == 'push'
         run: |
           nix show-config | grep -vi -e keys -e token
           nix build .#images.server --print-build-logs --show-trace
@@ -44,8 +45,10 @@ jobs:
           GC_DONT_GC: 1
       # Workaround for https://github.com/actions/upload-artifact/issues/92
       - name: Workaround
+        if: github.event_name == 'push'
         run: echo "UPLOAD_PATH=$(readlink -f result)" >> $GITHUB_ENV
       - name: Upload artifact
+        if: github.event_name == 'push'
         uses: actions/upload-artifact@v3
         with:
           name: nixospi
