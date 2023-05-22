@@ -12,16 +12,13 @@
     };
   };
 
-  outputs = { self, nixpkgs, nixos-hardware, sops-nix, ... }: {
+  outputs = { nixpkgs, self, ... } @ inputs: {
 
-    nixosModules.openFirewall = { config, pkgs, lib, ... }: {
-      services.openssh.openFirewall = lib.mkForce true;
-    };
+    nixosModules = import ./modules/nixos;
 
     images = {
       server = (self.nixosConfigurations.server.extendModules {
         modules = [
-          self.nixosModules.openFirewall
           "${nixpkgs}/nixos/modules/installer/sd-card/sd-image-aarch64.nix"
         ];
       }).config.system.build.sdImage;
@@ -30,11 +27,9 @@
     nixosConfigurations = {
       server = nixpkgs.lib.nixosSystem {
         system = "aarch64-linux";
+        specialArgs = inputs;
         modules = [
-          nixos-hardware.nixosModules.raspberry-pi-4
-          ./configuration.nix
-          ./base.nix
-          sops-nix.nixosModules.sops
+          ./hosts/server
         ];
       };
     };
