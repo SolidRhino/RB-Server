@@ -40,7 +40,7 @@ jobs:
         run: |
           nix show-config | grep -vi -e keys -e token
           nix build .#images.server --print-build-logs --show-trace
-          nix show-derivation ./result
+          nix derivation show ./result
         env:
           GC_DONT_GC: 1
       # Workaround for https://github.com/actions/upload-artifact/issues/92

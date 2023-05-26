@@ -10,7 +10,7 @@
     blacklistedKernelModules = lib.mkForce [ "bluetooth" "btusb" "zfs" ];
     #kernelModules = lib.mkForce [ "bridge" "macvlan" "tap" "tun" "loop" "atkbd" "ctr" ];
     supportedFilesystems = lib.mkForce [ "btrfs" "reiserfs" "vfat" "f2fs" "xfs" "ntfs" "cifs" "ext4" "vfat" ];
-    cleanTmpDir = true;
+    tmp.cleanOnBoot = true;
   };
 
   # Disable documentation
