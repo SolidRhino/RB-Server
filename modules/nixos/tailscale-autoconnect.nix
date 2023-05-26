@@ -9,9 +9,14 @@ in
 {
   options.services.tailscaleAutoconnect = {
     enable = mkEnableOption "tailscaleAutoconnect";
-    authkeyFile = mkOption {
+    clientIdFile = mkOption {
       type = types.str;
-      description = "The authkey to use for authentication with Tailscale";
+      description = "The client id to use for authentication with Tailscale";
+    };
+
+    clientSecreteFile = mkOption {
+      type = types.str;
+      description = "The client secret to use for authentication with Tailscale";
     };
 
     loginServer = mkOption {
@@ -42,8 +47,12 @@ in
   config = mkIf cfg.enable {
     assertions = [
       {
-        assertion = cfg.authkeyFile != "";
-        message = "authkeyFile must be set";
+        assertion = cfg.clientIdFile != "";
+        message = "clientIdFile must be set";
+      }
+      {
+        assertion = cfg.clientSecreteFile != "";
+        message = "clientSecreteFile must be set";
       }
       {
         assertion = cfg.exitNodeAllowLanAccess -> cfg.exitNode != "";
