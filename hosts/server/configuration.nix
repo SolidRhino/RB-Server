@@ -1,80 +1,20 @@
 { pkgs, config, ... }:
 {
+  imports = [
+    ../common
+    ./hardware-configuration.nix
+    ./users.nix
+  ];
+
   environment.systemPackages = with pkgs; [ nano vim git tailscale jq ];
 
-  services = {
-    openssh = {
-      allowSFTP = false;
-      enable = true;
-      openFirewall = true;
-      passwordAuthentication = false;
-      permitRootLogin = "no";
-      startWhenNeeded = true;
-    };
-
-    hardware.argonone.enable = true;
-
-    tailscale = {
-      enable = true;
-    };
-  };
-
-  nix = {
-    settings = {
-      auto-optimise-store = true;
-      experimental-features = [ "nix-command" "flakes" ];
-      substituters = [
-        "https://nixos-pi.cachix.org/"
-        "https://nix-community.cachix.org"
-        "https://cache.nixos.org/"
-      ];
-
-      trusted-public-keys = [
-        "nixos-pi.cachix.org-1:SPIYe50yOaVAHLETuPoKnfPXrB0/ADlG2lwCve0MXoo="
-        "nix-community.cachix.org-1:mB9FSh9qf2dCimDSUo8Zy7bkq5CX+/rkCWyvRCYg3Fs="
-      ];
-    };
-    gc = {
-      automatic = true;
-      dates = "weekly";
-      options = "--delete-older-than 30d";
-    };
-    # Free up to 1GiB whenever there is less than 100MiB left.
-    extraOptions = ''
-      min-free = ${toString (100 * 1024 * 1024)}
-      max-free = ${toString (1024 * 1024 * 1024)}
-    '';
-  };
-
-  time = {
-    timeZone = "Europe/Amsterdam";
-  };
-
-  users = {
-    groups = {
-      server = { };
-    };
-    mutableUsers = false;
-    users = {
-      root = {
-        hashedPassword = "!";
-      };
-      server = {
-        extraGroups = [
-          "wheel"
-        ];
-        group = "server";
-        hashedPassword = "$y$j9T$OmOVhczR/UZFeN5ISJ8xD0$OwAH3CGtPPuNJCG6tY1X3SGU9ttpEJ0F5kQrH2Bxqr3";
-        isNormalUser = true;
-        openssh = {
-          authorizedKeys = {
-            keys = [
-              "ssh-ed25519 AAAAC3NzaC1lZDI1NTE5AAAAIJQ2OaPn0ChXY6bmYuIeoTd+X4hvockuD6buHCpIlNXn"
-            ];
-          };
-        };
-      };
-    };
+  services.openssh = {
+    allowSFTP = false;
+    enable = true;
+    openFirewall = true;
+    passwordAuthentication = false;
+    permitRootLogin = "no";
+    startWhenNeeded = true;
   };
 
   networking = {
@@ -84,15 +24,8 @@
       allowedUDPPorts = [ ];
       allowedTCPPorts = [ ];
       enable = true;
-      trustedInterfaces = [
-        "tailscale0"
-      ];
     };
     hostName = "server";
-  };
-
-  hardware = {
-    bluetooth.enable = false;
   };
 
   #Setup sops

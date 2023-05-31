@@ -1,5 +1,8 @@
 { pkgs, lib, ... }:
 {
+  hardware.argonone.enable = true;
+  hardware.bluetooth.enable = false;
+
   boot = {
     # Use mainline kernel, vendor kernel has some issues compiling due to
     # missing modules that shouldn't even be in the closure.
@@ -13,10 +16,6 @@
     tmp.cleanOnBoot = true;
   };
 
-  # Disable documentation
-  documentation.man.enable = false;
-  documentation.doc.enable = false;
-
   # "${nixpkgs}/nixos/modules/installer/sd-card/sd-image-aarch64.nix" usually
   # contains this, it's the one thing from the installer image that we
   # actually need.
@@ -25,11 +24,4 @@
       device = "/dev/disk/by-label/NIXOS_SD";
       fsType = "ext4";
     };
-
-  system.stateVersion = "22.11";
-
-  system.activationScripts.report-changes = ''
-    PATH=$PATH:${lib.makeBinPath [ pkgs.nvd pkgs.nix ]}
-    nvd diff $(ls -dv /nix/var/nix/profiles/system-*-link | tail -2)
-  '';
 }
