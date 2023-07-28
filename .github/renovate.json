@@ -7,9 +7,6 @@
   "nix": {
     "enabled": true
   },
-  "constraints": {
-    "nix": "< 2.14.0"
-  },
   "lockFileMaintenance": {
     "enabled": true
   }
