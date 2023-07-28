@@ -1,6 +1,6 @@
 { pkgs, lib, ... }:
 {
-  hardware.argonone.enable = true;
+  services.hardware.argonone.enable = true;
   hardware.bluetooth.enable = false;
 
   boot = {
