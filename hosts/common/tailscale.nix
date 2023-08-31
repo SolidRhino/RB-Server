@@ -9,7 +9,6 @@
     enable = true;
 
     authkeyFile = config.sops.secrets.tailscale_key.path;
-    loginServer = "https://headscale.ozeliurs.com";
     advertiseExitNode = lib.mkDefault true;
   };
 
@@ -17,7 +16,7 @@
     sopsFile = ./secrets.yaml;
   };
 
-  environment.persistence = {
-    "/persist".directories = [ "/var/lib/tailscale" ];
-  };
+  #environment.persistence = {
+  #  "/persist".directories = [ "/var/lib/tailscale" ];
+  #};
 }
