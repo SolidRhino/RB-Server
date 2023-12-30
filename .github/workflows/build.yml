@@ -49,7 +49,7 @@ jobs:
         run: echo "UPLOAD_PATH=$(readlink -f result)" >> $GITHUB_ENV
       - name: Upload artifact
         if: github.event_name == 'push'
-        uses: actions/upload-artifact@v3
+        uses: actions/upload-artifact@v4
         with:
           name: nixospi
           path: ${{ env.UPLOAD_PATH }}
