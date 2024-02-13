@@ -28,7 +28,7 @@ jobs:
             system-features = big-parallel kvm
             experimental-features = nix-command flakes
       - name: Setup cachix
-        uses: cachix/cachix-action@v13
+        uses: cachix/cachix-action@v14
         with:
           name: nixos-pi
           authToken: "${{ secrets.CACHIX_AUTH_TOKEN }}"
