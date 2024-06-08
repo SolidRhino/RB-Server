@@ -61,17 +61,20 @@
                   delta.enable = true;
                   devcontainer = {
                     enable = true;
-                    settings.customizations.vscode.extensions = [
-                      "mkhl.direnv"
-                      "signageos.signageos-vscode-sops"
-                      "github.vscode-github-actions"
-                      "codezombiech.gitignore"
-                      "eamodio.gitlens"
-                      "PKief.material-icon-theme"
-                      "jnoortheen.nix-ide"
-                      "arrterian.nix-env-selector"
-                      "enkia.tokyo-night"
-                    ];
+                    settings = {
+                      customizations.vscode.extensions = [
+                        "mkhl.direnv"
+                        "signageos.signageos-vscode-sops"
+                        "github.vscode-github-actions"
+                        "codezombiech.gitignore"
+                        "eamodio.gitlens"
+                        "PKief.material-icon-theme"
+                        "jnoortheen.nix-ide"
+                        "arrterian.nix-env-selector"
+                        "enkia.tokyo-night"
+                      ];
+                      updateContentCommand = "";
+                    };
                   };
                   languages = {
                     nix.enable = true;
