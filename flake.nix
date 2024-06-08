@@ -1,35 +1,102 @@
 {
   inputs = {
     nixpkgs.url = "github:nixos/nixpkgs/nixos-unstable";
-
     nixos-hardware.url = "github:nixos/nixos-hardware";
-
+    
     sops-nix = {
       url = "github:Mic92/sops-nix";
       inputs.nixpkgs.follows = "nixpkgs";
     };
+    devenv = {
+      url = "github:cachix/devenv";
+      inputs.nixpkgs.follows = "nixpkgs";
+    };
+    systems.url = "github:nix-systems/default";
   };
 
-  outputs = { nixpkgs, self, ... } @ inputs: {
+  nixConfig = {
+    extra-trusted-public-keys = "devenv.cachix.org-1:w1cLUi8dv3hnoSPGAuibQv+f9TZLr6cv/Hm9XgU50cw=";
+    extra-substituters = "https://devenv.cachix.org";
+  };
 
-    nixosModules = import ./modules/nixos;
+  outputs = { self, nixpkgs, devenv, systems, ... } @ inputs: {
+    let
+      forEachSystem = nixpkgs.lib.genAttrs (import systems);
+    in
+    {
+      packages = forEachSystem (system: {
+        devenv-up = self.devShells.${system}.default.config.procfileScript;
+      });
 
-    images = {
-      server = (self.nixosConfigurations.server.extendModules {
-        modules = [
-          "${nixpkgs}/nixos/modules/installer/sd-card/sd-image-aarch64.nix"
-        ];
-      }).config.system.build.sdImage;
-    };
-
-    nixosConfigurations = {
-      server = nixpkgs.lib.nixosSystem {
-        system = "aarch64-linux";
-        specialArgs = inputs;
-        modules = [
-          ./hosts/server
-        ];
+      nixosModules = import ./modules/nixos;
+      
+      images = {
+        server = (self.nixosConfigurations.server.extendModules {
+          modules = [
+            "${nixpkgs}/nixos/modules/installer/sd-card/sd-image-aarch64.nix"
+          ];
+        }).config.system.build.sdImage;
       };
+      
+      nixosConfigurations = {
+        server = nixpkgs.lib.nixosSystem {
+          system = "aarch64-linux";
+          specialArgs = inputs;
+          modules = [
+            ./hosts/server
+          ];
+        };
+      };
+      devShells = forEachSystem
+        (system:
+          let
+            pkgs = nixpkgs.legacyPackages.${system};
+          in
+          {
+            default = devenv.lib.mkShell {
+              inherit inputs pkgs;
+              modules = [
+                {
+                  # https://devenv.sh/reference/options/
+                  delta.enable = true;
+                  devcontainer = {
+                    enable = true;
+                    settings.customizations.vscode.extensions = [
+                      "mkhl.direnv"
+                      "signageos.signageos-vscode-sops"
+                      "github.vscode-github-actions"
+                      "codezombiech.gitignore"
+                      "eamodio.gitlens"
+                      "PKief.material-icon-theme"
+                      "jnoortheen.nix-ide"
+                      "arrterian.nix-env-selector"
+                      "enkia.tokyo-night"
+                    ];
+                  };
+                  languages = {
+                    nix.enable = true;
+                  };
+                  pre-commit = {
+                    hooks = {
+                      pre-commit-hook-ensure-sops.enable = true;
+                      detect-aws-credentials.enable = true;
+                      detect-private-keys.enable = true;
+                      editorconfig-checker.enable = true;
+                      trim-trailing-whitespace.enable = true;
+                      check-added-large-files.enable = true;
+                      deadnix.enable = true;
+                      alejandra.enable = true;
+                      commitizen.enable = true;
+                      check-merge-conflicts.enable = true;
+                    };
+                  };
+                  starship.enable = true;
+                  enterShell = ''
+                  '';
+                }
+              ];
+            };
+          });
     };
   };
 }
