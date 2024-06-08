@@ -84,6 +84,7 @@
                       pre-commit-hook-ensure-sops.enable = true;
                       detect-aws-credentials.enable = true;
                       detect-private-keys.enable = true;
+                      check-yaml.enable = true;
                       editorconfig-checker.enable = true;
                       trim-trailing-whitespace.enable = true;
                       check-added-large-files.enable = true;
