@@ -1,0 +1,20 @@
+{
+  "customizations": {
+    "vscode": {
+      "extensions": [
+        "mkhl.direnv",
+        "signageos.signageos-vscode-sops",
+        "github.vscode-github-actions",
+        "codezombiech.gitignore",
+        "eamodio.gitlens",
+        "PKief.material-icon-theme",
+        "jnoortheen.nix-ide",
+        "arrterian.nix-env-selector",
+        "enkia.tokyo-night"
+      ]
+    }
+  },
+  "image": "ghcr.io/cachix/devenv:latest",
+  "overrideCommand": false,
+  "updateContentCommand": "devenv test"
+}
