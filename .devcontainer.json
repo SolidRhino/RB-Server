@@ -1,0 +1,34 @@
+{
+  "customizations": {
+    "vscode": {
+      "extensions": [
+        "mkhl.direnv",
+        "signageos.signageos-vscode-sops",
+        "github.vscode-github-actions",
+        "codezombiech.gitignore",
+        "PKief.material-icon-theme",
+        "jnoortheen.nix-ide",
+        "arrterian.nix-env-selector",
+        "enkia.tokyo-night",
+        "kamadorueda.alejandra"
+      ],
+      "settings": {
+        "git": {
+          "alwaysSignOff": true,
+          "autofetch": true,
+          "confirmSync": false
+        },
+        "nix": {
+          "enableLanguageServer": true
+        },
+        "workbench": {
+          "colorTheme": "Tokyo Night",
+          "iconTheme": "material-icon-theme"
+        }
+      }
+    }
+  },
+  "image": "ghcr.io/cachix/devenv:latest",
+  "overrideCommand": false,
+  "updateContentCommand": ""
+}
