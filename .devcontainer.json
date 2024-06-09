@@ -15,8 +15,12 @@
       ],
       "settings": {
         "git": {
+          "alwaysSignOff": true,
           "autofetch": true,
           "confirmSync": false
+        },
+        "nix": {
+          "enableLanguageServer": true
         },
         "workbench": {
           "colorTheme": "Tokyo Night",

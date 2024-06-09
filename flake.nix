@@ -72,10 +72,12 @@
                 settings = {
                   customizations.vscode = {
                     settings = {
+                      git.alwaysSignOff = true;
+                      git.autofetch = true;
+                      git.confirmSync = false;
+                      nix.enableLanguageServer = true;
                       workbench.colorTheme = "Tokyo Night";
                       workbench.iconTheme = "material-icon-theme";
-                      git.confirmSync = false;
-                      git.autofetch = true;
                     };
                     extensions = [
                       "mkhl.direnv"
@@ -107,6 +109,7 @@
                   check-added-large-files.enable = true;
                   deadnix.enable = true;
                   alejandra.enable = true;
+                  flake-checker.enable = true;
                   check-merge-conflicts.enable = true;
                 };
               };
