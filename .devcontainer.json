@@ -12,7 +12,17 @@
         "arrterian.nix-env-selector",
         "enkia.tokyo-night",
         "kamadorueda.alejandra"
-      ]
+      ],
+      "settings": {
+        "git": {
+          "autofetch": true,
+          "confirmSync": false
+        },
+        "workbench": {
+          "colorTheme": "Tokyo Night",
+          "iconTheme": "material-icon-theme"
+        }
+      }
     }
   },
   "image": "ghcr.io/cachix/devenv:latest",
