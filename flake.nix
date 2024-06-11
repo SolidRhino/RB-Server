@@ -72,12 +72,16 @@
                 settings = {
                   customizations.vscode = {
                     settings = {
-                      git.alwaysSignOff = true;
-                      git.autofetch = true;
-                      git.confirmSync = false;
+                      git = {
+                        alwaysSignOff = true;
+                        autofetch = true;
+                        confirmSync = false;
+                      };
                       nix.enableLanguageServer = true;
-                      workbench.colorTheme = "Tokyo Night";
-                      workbench.iconTheme = "material-icon-theme";
+                      workbench = {
+                        colorTheme = "Tokyo Night";
+                        iconTheme = "material-icon-theme";
+                      };
                     };
                     extensions = [
                       "mkhl.direnv"
