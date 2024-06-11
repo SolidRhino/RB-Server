@@ -98,6 +98,11 @@
                   updateContentCommand = "";
                 };
               };
+              packages = with pkgs; [
+                git
+                gnumake
+                lazygit
+              ];
               languages = {
                 nix.enable = true;
               };
