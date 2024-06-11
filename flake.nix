@@ -112,7 +112,6 @@
                   check-merge-conflicts.enable = true;
                 };
               };
-              starship.enable = true;
             }
           ];
         };
